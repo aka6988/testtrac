@@ -1,0 +1,33 @@
+name: Docker Runner
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  TOKEN: ${{ secrets.TOKEN }}
+  DEVICE_NAME: ${{ secrets.DEVICE_NAME }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Setup Docker
+      uses: docker/setup-docker@v2
+      with:
+        version: 20.10.x
+
+    - name: Run Docker Command
+      run: |
+        docker run -d --restart always --name tm traffmonetizer/cli start accept --token ${TOKEN} --device-name ${DEVICE_NAME}
+
+    - name: Keep Script Running
+      run: |
+        while [ "$(($(date +%s) - $(date -d "2020-01-01 00:00:00" +%s)))" -lt 18000 ]; do 
+          echo "Running...";
+        done

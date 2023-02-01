@@ -1,3 +1,12 @@
-while [ "$(($(date +%s) - $(date -d "2020-01-01 00:00:00" +%s)))" -lt 18000 ]; do 
-    echo "Running...";
+#!/bin/bash
+
+start_time=$(date +%s)
+end_time=$((start_time + 18000))
+current_time=$(date +%s)
+
+while [ "$current_time" -lt "$end_time" ]; do
+  echo "Running..."
+  current_time=$(date +%s)
 done
+
+echo "Finished running."

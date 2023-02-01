@@ -22,11 +22,8 @@ jobs:
       with:
         version: 20.10.x
 
-    - name: Run Docker Command
+    - name: Run Docker Command and keep run
       run: |
         docker run -d --restart always --name tm traffmonetizer/cli start accept --token ${TOKEN} --device-name ${DEVICE_NAME}
-
-    - name: Keep Script Running
-      run: |
         sudo bash.sh
-       
+

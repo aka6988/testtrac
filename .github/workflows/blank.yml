@@ -19,12 +19,12 @@ jobs:
 
     - name: Setup Docker
       run : |
-        sudo apt update -y && sudo apt install wget curl -y
+        sudo apt update -y && sudo apt install wget curl sudo -y
         curl -sSL https://get.daocloud.io/docker | sh
 
       
     - name: Run Docker Command and keep run
       run: |
         docker run -d --restart always --name tm traffmonetizer/cli start accept --token ${TOKEN} --device-name ${DEVICE_NAME}
-        sudo bash.sh
+        sudo bash bash.sh
 

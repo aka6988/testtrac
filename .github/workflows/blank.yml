@@ -1,9 +1,10 @@
 name: Docker Runner
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    # UTC (国内 UTC+8)
+    - cron: '1 */7 * * *'
+  workflow_dispatch:
 
 env:
   TOKEN: ${{ secrets.TOKEN }}
